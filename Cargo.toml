@@ -1,0 +1,59 @@
+[package]
+name = "raa"
+version = "0.1.0"
+edition = "2021"
+authors = ["RAA Developer"]
+description = "Remote Access Agent - Cross-platform monitoring and notification agent"
+
+[dependencies]
+# HTTP client for webhook requests
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+# Serialization/deserialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# Platform-aware paths
+dirs = "5.0"
+# System information 
+sysinfo = "0.29"
+# File system monitoring
+notify = "6.0"
+# Battery information
+battery = "0.7"
+# CLI arguments parsing
+clap = { version = "4.4", features = ["derive"] }
+# Logging
+log = "0.4"
+env_logger = "0.10"
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+# Tokio for async runtime
+tokio = { version = "1.28", features = ["full"] }
+# Scheduled tasks
+tokio-cron-scheduler = "0.9"
+# Get hostname
+gethostname = "0.4"
+# Date and time handling
+chrono = "0.4"
+# Platform-specific modules
+[target.'cfg(windows)'.dependencies]
+winreg = "0.51" # Windows registry access
+windows-service = "0.6" # Windows service support
+
+[target.'cfg(target_os = "macos")'.dependencies]
+cocoa = "0.25" # macOS Cocoa bindings
+objc = "0.2" # Objective-C runtime bindings
+objc-foundation = "0.1" # Foundation framework bindings
+core-foundation = "0.9"
+
+[package.metadata.bundle]
+name = "RAA"
+identifier = "com.raa.agent"
+icon = ["icons/raa.icns"]
+version = "0.1.0"
+resources = []
+copyright = "Copyright (c) RAA Developer 2025. All rights reserved."
+category = "Developer Tool"
+short_description = "Remote Access Agent"
+long_description = "Cross-platform monitoring and notification agent"
+osx_minimum_system_version = "10.15"
